@@ -4,41 +4,45 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>蒲公英 · 种子写信 | 45°全息投影</title>
+<title>蒲公英 · 四面倒金字塔全息 · 种子写信</title>
 <style>
 :root{color-scheme:dark;--ink:#eeeae5;--muted:#a39fa2;--line:#3a343b;--gold:#ddc99e;--bg:#111014}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#000;color:var(--ink);font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;overflow:hidden}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.3;cursor:not-allowed}
 #projection{position:fixed;inset:0;display:block;width:100%;height:100%;background:#000;touch-action:manipulation}
 #editor{position:fixed;z-index:5;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));bottom:max(12px,env(safe-area-inset-bottom));width:min(448px,calc(100vw - 24px));display:flex;flex-direction:column;overflow:hidden;background:rgba(17,16,20,.97);border:1px solid #4e4144;border-radius:19px;box-shadow:0 16px 65px #000c;backdrop-filter:blur(16px)}
 #editor header{padding:17px 17px 11px;border-bottom:1px solid #302b30;flex:0 0 auto}#editor h1{font-size:19px;font-weight:600;letter-spacing:.05em;margin:0 0 5px}#editor header p{font-size:12px;line-height:1.55;margin:0;color:var(--muted)}#editor main{overflow-y:auto;overscroll-behavior:contain;padding:12px 14px 22px;flex:1}#editor footer{padding:12px 14px;background:#16141a;border-top:1px solid #312d31;flex:0 0 auto;display:grid;gap:9px}.section-title{display:flex;align-items:center;justify-content:space-between;margin:6px 0 10px;font-size:12px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}.secondary{color:var(--muted);font-size:11px}.round{padding:12px;border:1px solid #393238;border-radius:14px;background:#1c1920;margin-bottom:12px}.roundhead{display:flex;align-items:center;gap:6px;margin-bottom:12px}.roundhead strong{font-size:13px;flex:1;color:#e5d4b0}.small{font-size:11px;padding:6px 7px;background:#29252c;border:1px solid #534951;color:#d2ced1;border-radius:7px;min-width:27px}.danger{color:#e9a6aa}.round-options{display:flex;align-items:center;gap:8px;color:#aaa1a7;font-size:11px;margin-bottom:10px}.round-options input{width:66px}.sentence{background:#111015;border:1px solid #343038;border-radius:10px;padding:10px;margin:9px 0}.sentence-top{display:flex;align-items:center;gap:5px;margin-bottom:8px;color:#bdadb4;font-size:11px}.sentence-top span{flex:1}.sentence textarea{resize:vertical;min-height:53px;max-height:150px;width:100%;padding:9px 10px;color:#fff;border:1px solid #554c55;background:#232028;border-radius:8px;line-height:1.5;font-size:14px}.sentence textarea:focus,.num:focus{outline:1px solid #dcc59c}.timings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}.timings label{font-size:11px;color:#a9a0a7;display:flex;justify-content:space-between;align-items:center;gap:5px}.num{width:62px;height:29px;padding:3px 5px;border-radius:7px;border:1px solid #514750;background:#211e24;color:#f3eee8;text-align:center;font-size:12px}.btn{border:1px solid #504750;border-radius:9px;padding:10px 11px;background:#28232a;color:#f1eaf0;font-size:12px}.btn.primary{background:#ddc99e;color:#201d1a;border-color:#f0d9aa;font-weight:700;font-size:14px;letter-spacing:.04em}.btn.ghost{background:transparent;border-style:dashed;color:#d3c5b5}.btn:active,.small:active{transform:scale(.98)}.flex{display:flex;gap:7px}.flex>*{flex:1}.toolbar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.toolbar>*{flex:1}.timeline{border-top:1px solid #373037;margin-top:13px;padding-top:10px;color:#aeaaad;font-size:11px;line-height:1.7}.timeline div{display:flex;justify-content:space-between;gap:10px}.timeline span:last-child{color:#d2bea1;white-space:nowrap}.param{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:10px 0;font-size:12px}.param label{min-width:76px}.param input[type=range]{flex:1;min-width:0;accent-color:#e4cd9a}.param output{font-size:11px;width:38px;text-align:right;color:#c7bfb2}details{border:1px solid #373038;border-radius:10px;margin:12px 0;background:#19171b;padding:10px}summary{cursor:pointer;font-size:12px;color:#d8c6ad}details p{font-size:11px;color:#9c959b;line-height:1.65;margin:7px 0 0}.check{display:flex;gap:8px;align-items:center;font-size:12px;color:#d3cbc4;margin:10px 0}.check input{accent-color:#d3bb89}.play-footer{display:grid;grid-template-columns:1fr auto;gap:8px}.play-footer .btn.primary{padding:13px 12px}.status{font-size:11px;color:#b1a3a7;display:flex;align-items:center;justify-content:space-between;gap:12px}#fileImport{display:none}#toast{position:fixed;z-index:9;top:18px;left:50%;transform:translateX(-50%);background:#29242d;color:white;padding:9px 16px;border:1px solid #756b74;border-radius:9px;font-size:12px;pointer-events:none;display:none;box-shadow:0 4px 24px #0009}
-body.playing #editor{display:none}#help{position:fixed;bottom:12px;right:10px;z-index:2;color:#615d61;font-size:10px;pointer-events:none;opacity:0}body.playing.admin #help{opacity:.34}#return{position:fixed;z-index:4;right:0;top:0;width:65px;height:65px;border:0;background:transparent;display:none}body.playing.admin #return{display:block}#return:focus-visible{outline:1px solid #fff}#hotspot{position:fixed;top:0;right:0;z-index:3;width:56px;height:56px;display:none}body.playing #hotspot{display:block}
+body.playing #editor{display:none}#help{position:fixed;bottom:12px;right:10px;z-index:2;color:#615d61;font-size:10px;pointer-events:none;opacity:0}body.playing.admin #help{opacity:.34}#return{position:fixed;z-index:4;right:0;top:0;width:65px;height:65px;border:0;background:transparent;display:none}body.playing.admin #return{display:block}#return:focus-visible{outline:1px solid #fff}
 @media(max-width:500px){#editor{width:calc(100vw - 16px);left:8px;top:8px;bottom:8px;border-radius:14px}#editor header{padding:12px 13px 9px}#editor main{padding:9px 10px 15px}#editor footer{padding:10px}.round{padding:10px}.sentence{padding:8px}#editor h1{font-size:17px}}
 @media (prefers-reduced-motion:reduce){button{scroll-behavior:auto}}
-body.audience #editor,body.admin:not(.admin-authenticated) #editor{display:none}#cloudGate{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:#000e;padding:22px}body.audience #cloudGate,body.admin:not(.admin-authenticated) #cloudGate{display:flex}.gate-card{width:min(420px,100%);padding:22px;border:1px solid #554a50;border-radius:16px;background:#19171c;box-shadow:0 12px 50px #000b}.gate-card h2{font-size:19px;margin:0 0 9px;color:#ead9b9}.gate-card p{font-size:13px;line-height:1.65;color:#bdb5b6}.gate-card input{width:100%;padding:11px;border:1px solid #554c55;border-radius:8px;background:#232028;color:#fff;margin:8px 0}.gate-card button{width:100%;margin-top:8px}.gate-error{color:#f0a4a8!important}.admin-tools{display:none;gap:7px;padding:9px 14px;border-bottom:1px solid #302b30}body.admin .admin-tools{display:flex}.admin-tools button{flex:1}.cloud-status{font-size:11px;color:#b1a3a7}.audience-tools{position:fixed;z-index:8;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);left:50%;transform:translateX(-50%);display:none;align-items:center;justify-content:center;gap:8px}body.audience.ready:not(.playing) .audience-tools{display:flex}body.audience .audience-tools button{background:#1a181dcc;border-color:#504750;opacity:.72}body.audience #play,body.audience #still{display:none}body.audience #startShow{position:relative;left:auto;bottom:auto;transform:none;width:min(68vw,420px);height:96px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:rgba(255,255,255,.2);font-size:20px;letter-spacing:.12em;opacity:.035;padding:0;box-shadow:none;transition:opacity .18s ease}body.audience #startShow:hover,body.audience #startShow:focus-visible{opacity:.32;outline:1px solid rgba(255,255,255,.24)}body.audience.playing .audience-tools{display:none}body.audience.ready:not(.playing) #startShow{display:block}body.audience:not(.finished) #replay,body.audience:not(.finished) #audienceFull{display:none}</style>
+body.audience #editor,body.admin:not(.admin-authenticated) #editor{display:none}#cloudGate{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:#000e;padding:22px}body.audience #cloudGate,body.admin:not(.admin-authenticated) #cloudGate{display:flex}.gate-card{width:min(420px,100%);padding:22px;border:1px solid #554a50;border-radius:16px;background:#19171c;box-shadow:0 12px 50px #000b}.gate-card h2{font-size:19px;margin:0 0 9px;color:#ead9b9}.gate-card p{font-size:13px;line-height:1.65;color:#bdb5b6}.gate-card input{width:100%;padding:11px;border:1px solid #554c55;border-radius:8px;background:#232028;color:#fff;margin:8px 0}.gate-card button{width:100%;margin-top:8px}.gate-error{color:#f0a4a8!important}.admin-tools{display:none;gap:7px;padding:9px 14px;border-bottom:1px solid #302b30}body.admin .admin-tools{display:flex}.admin-tools button{flex:1}.cloud-status{font-size:11px;color:#b1a3a7}.audience-tools{position:fixed;z-index:8;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);left:50%;transform:translateX(-50%);display:none;align-items:center;justify-content:center;gap:8px}body.audience.ready:not(.playing) .audience-tools{display:flex}body.audience .audience-tools button{background:#1a181dcc;border-color:#504750;opacity:.72}body.audience #play,body.audience #still{display:none}body.audience #startShow{position:relative;left:auto;bottom:auto;transform:none;width:min(68vw,420px);height:96px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:rgba(255,255,255,.2);font-size:20px;letter-spacing:.12em;opacity:.035;padding:0;box-shadow:none;transition:opacity .18s ease}body.audience #startShow:hover,body.audience #startShow:focus-visible{opacity:.32;outline:1px solid rgba(255,255,255,.24)}body.audience.playing .audience-tools{display:none}body.audience.ready:not(.playing) #startShow{display:block}body.audience:not(.finished) #replay,body.audience:not(.finished) #audienceFull{display:none}
+</style>
 </head>
 <body>
-<div id="cloudGate"><div class="gate-card"><h2 id="gateTitle">连接云端演出</h2><p id="gateMessage">正在读取最新发布的演出…</p><form id="adminLogin" style="display:none"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="管理密码"><button class="btn primary" type="submit">进入管理端</button></form><button id="gateRetry" class="btn" style="display:none">重新读取</button></div></div><div class="audience-tools"><button id="startShow" class="btn" type="button">开始演出</button><button id="replay" class="btn">↻ 重播</button><button id="audienceFull" class="btn">全屏</button></div><canvas id="projection" aria-label="45度透明板蒲公英全息投影画面"></canvas>
+<div id="cloudGate"><div class="gate-card"><h2 id="gateTitle">连接云端演出</h2><p id="gateMessage">正在读取最新发布的演出…</p><form id="adminLogin" style="display:none"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="管理密码"><button class="btn primary" type="submit">进入管理端</button></form><button id="gateRetry" class="btn" style="display:none">重新读取</button></div></div><div class="audience-tools"><button id="startShow" class="btn" type="button">开始演出</button><button id="replay" class="btn">↻ 重播</button><button id="audienceFull" class="btn">全屏</button></div><canvas id="projection" aria-label="四面倒金字塔全息投影四视图画面"></canvas>
 <div id="editor">
-  <header><h1>✦ 蒲公英 · 种子写信</h1><p>45° 单片投影｜种子飞来组成字，停留，再飘散。所有文字、轮次和时间都能临场修改。</p></header>
+  <header><h1>✦ 蒲公英 · 种子写信</h1><p>四面倒金字塔全息｜上下左右同时渲染四个方位。种子聚字、停留、散去，临时编辑轮次与时间。</p></header>
   <div class="admin-tools"><button id="cloudLogin" class="btn">登录云端管理</button><button id="cloudPreview" class="btn">预览当前草稿</button><button id="cloudPublish" class="btn primary">发布演出</button><span id="cloudStatus" class="cloud-status">尚未连接</span></div><main>
     <div class="section-title"><span>演出编排 · 轮次不限</span><span id="saved" class="secondary">自动保存</span></div>
     <div id="rounds"></div>
     <button type="button" id="addRound" class="btn ghost" style="width:100%">＋ 新增一轮</button>
     <div class="timeline"><div><strong>播放时间表</strong><span id="totalTime"></span></div><div style="color:#77727a">开场蒲公英旋转 → 按顺序依次播放 → 结束后重新悬浮</div><div id="schedule" style="display:block;margin-top:5px"></div></div>
-    <details><summary>投影校准 / 速度 / 镜像</summary>
-      <div class="param"><label for="imageScale">画面大小</label><input type="range" id="imageScale" min="0.45" max="1.45" step="0.05"><output id="scaleOut"></output></div>
+    <details open><summary>四面投影校准 / 速度 / 镜像</summary>
+      <div class="param"><label for="imageScale">每面影像大小</label><input type="range" id="imageScale" min="0.45" max="1.45" step="0.05"><output id="scaleOut"></output></div>
       <div class="param"><label for="posX">水平位置</label><input type="range" id="posX" min="-0.65" max="0.65" step="0.02"><output id="posXOut"></output></div>
       <div class="param"><label for="posY">垂直位置</label><input type="range" id="posY" min="-0.65" max="0.65" step="0.02"><output id="posYOut"></output></div>
       <div class="param"><label for="spinSpeed">旋转速度</label><input type="range" id="spinSpeed" min="0" max="1.5" step="0.05"><output id="speedOut"></output></div>
-      <label class="check"><input type="checkbox" id="mirror"> 左右镜像（文字反了就勾选）</label>
+      <div class="param"><label for="gap">中心空隙</label><input type="range" id="gap" min="0.02" max="0.30" step="0.01"><output id="gapOut"></output></div>
+      <label class="check"><input type="checkbox" id="flip"> 四面整体翻转180°（装置方向不同时使用）</label>
+      <label class="check"><input type="checkbox" id="guide"> 显示十字校准线（测试结束请关闭）</label>
+      <label class="check"><input type="checkbox" id="mirror"> 左右镜像（字反了就勾选）</label>
       <label class="check"><input type="checkbox" id="repeat"> 整段演出循环播放</label>
-      <p>画面全黑时无任何按钮；正在投影时，双击屏幕右上角可返回编辑。手机浏览器不一定支持网页自动全屏，可从浏览器菜单隐藏工具栏。</p>
+      <p>四朵蒲公英围绕屏幕正中央排列：上、下、左、右各一朵（四个相隔90°的视角）。把倒金字塔小端放在中心，四面朝向对应画面。演出时双击右上角退出。手机浏览器若不支持网页全屏，请使用“添加到主屏幕”。</p>
     </details>
     <div class="toolbar"><button type="button" id="export" class="btn">导出备份 JSON</button><button type="button" id="import" class="btn">导入备份 JSON</button><button type="button" id="clear" class="btn danger">清空台词</button></div>
     <input id="fileImport" type="file" accept=".json,application/json">
-    <p class="secondary" style="line-height:1.65;margin:10px 3px">文字存在当前设备当前网址的浏览器中；换手机、浏览器或网址时请用“导出/导入”转移。NFC 只储存公开网页链接，网页内容不会写进 NFC。</p>
+    <p class="secondary" style="line-height:1.65;margin:10px 3px">此独立 HTML 版只在本机浏览器保存文字；尚未连接你的后端。换手机或网址，请导出/导入 JSON；Codex 可在此基础上接入你已有的云端台词接口。</p>
   </main>
-  <footer><div class="status"><span id="count">—</span><span>单片45°反射 · 黑底</span></div><div class="play-footer"><button type="button" id="play" class="btn primary">▶ 开始完整演出</button><button type="button" id="still" class="btn">只看旋转</button></div></footer>
+  <footer><div class="status"><span id="count">—</span><span>倒金字塔 · 四方向 · 黑底</span></div><div class="play-footer"><button type="button" id="play" class="btn primary">▶ 开始完整演出</button><button type="button" id="still" class="btn">只看旋转</button></div></footer>
 </div>
 <div id="help">双击右上角退出</div><button id="return" aria-label="双击右上角返回编辑" title="双击返回编辑"></button><div id="toast"></div>
 <script>
@@ -49,20 +53,19 @@ const scene=document.createElement('canvas'),sc=scene.getContext('2d',{alpha:fal
 const flower=document.createElement('canvas'),fc=flower.getContext('2d',{alpha:false});flower.width=flower.height=480;
 const mask=document.createElement('canvas'),mc=mask.getContext('2d',{willReadFrequently:true});mask.width=mask.height=800;
 const ink=document.createElement('canvas'),ic=ink.getContext('2d');ink.width=ink.height=800;
-const KEY='dandelion-seed-letters-v1';let nextKey=0;
+const KEY='dandelion-seed-letters-pyramid-v2';let nextKey=0;
 const API_BASE='https://gangan.onrender.com';const isAdmin=new URLSearchParams(location.search).get('admin')==='1';document.body.classList.add(isAdmin?'admin':'audience');let adminPassword='',saveTimer=0;const setGate=(title,message,error=false)=>{document.getElementById('gateTitle').textContent=title;const m=document.getElementById('gateMessage');m.textContent=message;m.classList.toggle('gate-error',error)};
 async function api(path,options={}){const headers={'Content-Type':'application/json',...(options.headers||{})};if(adminPassword)headers['x-access-password']=adminPassword;const res=await fetch(API_BASE+path,{...options,headers});let body={};try{body=await res.json()}catch{}if(!res.ok)throw Error(body.error||'云端请求失败（'+res.status+'）');return body}
 async function loadPublished(autoStart=false){try{setGate('连接云端演出','正在读取最新发布的演出…');const data=await api('/api/gaixia/published');if(!data.show||!Array.isArray(data.show.rounds))throw Error('发布内容格式无效');model=sanitize(data.show);syncSettings();repaintEditor();document.body.classList.add('ready');document.getElementById('cloudGate').style.display='none';if(autoStart)startPlayback(false)}catch(e){setGate('无法读取演出',e.message+'。请检查网络后重试；未发布内容不会播放。',true);document.getElementById('gateRetry').style.display='block'}}
 async function loginAdmin(password){adminPassword=password;try{const data=await api('/api/gaixia/admin');document.body.classList.add('admin-authenticated');document.getElementById('cloudGate').style.display='none';if(data.draft){model=sanitize(data.draft);syncSettings();repaintEditor()}document.getElementById('cloudStatus').textContent=data.publishedAt?'已连接 · 最近发布 '+new Date(data.publishedAt).toLocaleString():'已连接 · 尚无已发布版本';$('saved').textContent='云端草稿已同步'}catch(e){adminPassword='';setGate('管理端登录',e.message,true)}}
 function saveCloudDraft(){if(!isAdmin||!document.body.classList.contains('admin-authenticated'))return;clearTimeout(saveTimer);$('saved').textContent='正在保存云端草稿…';saveTimer=setTimeout(async()=>{try{await api('/api/gaixia/admin',{method:'PUT',body:JSON.stringify({draft:model})});$('saved').textContent='云端草稿已保存'}catch(e){$('saved').textContent='云端保存失败：'+e.message}},700)}
-
 const id=()=>`${Date.now().toString(36)}${(++nextKey).toString(36)}`;
-const starter=()=>({rounds:[{id:id(),wait:2,lines:[{id:id(),text:'还有一颗。',wait:0.5,enter:2.8,hold:3.8,exit:1.6},{id:id(),text:'它一直在等风停。',wait:1,enter:2.8,hold:4.5,exit:1.6}]}],settings:{scale:1,posX:0,posY:0,speed:.35,mirror:false,repeat:false}});
+const starter=()=>({rounds:[{id:id(),wait:2,lines:[{id:id(),text:'还有一颗。',wait:0.5,enter:2.8,hold:3.8,exit:1.6},{id:id(),text:'它一直在等风停。',wait:1,enter:2.8,hold:4.5,exit:1.6}]}],settings:{scale:.86,posX:0,posY:0,speed:.35,gap:.08,flip:false,guide:false,mirror:false,repeat:false}});
 let model=starter(),W=0,H=0,dpr=1,started=performance.now(),lastFrame=started,rotation=0,playing=false,stillOnly=false,timeline=[],duration=0,playStart=0,phaseKey='',formation=null;
 const finite=(v,fallback,min,max)=>{const n=Number(v);return Number.isFinite(n)?Math.min(max,Math.max(min,n)):fallback};
 const cleanLine=v=>({id:String(v?.id||id()),text:String(v?.text||'').slice(0,120),wait:finite(v?.wait,.7,0,60),enter:finite(v?.enter,2.8,.5,20),hold:finite(v?.hold,4,.2,90),exit:finite(v?.exit,1.6,.4,20)});
-function sanitize(raw){const src=raw&&typeof raw==='object'?raw:{};return {rounds:Array.isArray(src.rounds)?src.rounds.map(r=>({id:String(r.id||id()),wait:finite(r.wait,2,0,120),lines:Array.isArray(r.lines)?r.lines.map(cleanLine):[]})):[],settings:{scale:finite(src.settings?.scale,1,.45,1.45),posX:finite(src.settings?.posX,0,-.65,.65),posY:finite(src.settings?.posY,0,-.65,.65),speed:finite(src.settings?.speed,.35,0,1.5),mirror:!!src.settings?.mirror,repeat:!!src.settings?.repeat}}}
-try{const saved=localStorage.getItem(KEY);if(saved)model=sanitize(JSON.parse(saved))}catch(e){/* Local file privacy modes can disable storage; export still works. */}
+function sanitize(raw){const src=raw&&typeof raw==='object'?raw:{};return {rounds:Array.isArray(src.rounds)?src.rounds.slice(0,150).map(r=>({id:String(r.id||id()),wait:finite(r.wait,2,0,120),lines:Array.isArray(r.lines)?r.lines.slice(0,200).map(cleanLine):[]})):[],settings:{scale:finite(src.settings?.scale,.86,.45,1.45),posX:finite(src.settings?.posX,0,-.65,.65),posY:finite(src.settings?.posY,0,-.65,.65),speed:finite(src.settings?.speed,.35,0,1.5),gap:finite(src.settings?.gap,.08,.02,.30),flip:!!src.settings?.flip,guide:!!src.settings?.guide,mirror:!!src.settings?.mirror,repeat:!!src.settings?.repeat}}}
+try{const saved=localStorage.getItem(KEY)||localStorage.getItem('dandelion-seed-letters-v1');if(saved)model=sanitize(JSON.parse(saved))}catch(e){/* Local file privacy modes can disable storage; export still works. */}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(model));$('saved').textContent='已保存在本机'}catch(e){$('saved').textContent='本机储存不可用，请导出备份'}saveCloudDraft()}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
 function action(label,act,ri,li,disabled=false){const b=el('button','small',label);b.type='button';b.dataset.action=act;b.dataset.ri=ri;if(li!==undefined)b.dataset.li=li;b.disabled=disabled;return b}
@@ -82,18 +85,39 @@ $('addRound').onclick=()=>{model.rounds.push({id:id(),wait:2,lines:[cleanLine({t
 $('clear').onclick=()=>{if(confirm('确定删除所有轮次和文字？此操作不能撤销，请先导出备份。')){model.rounds=[];persist();repaintEditor()}};
 $('export').onclick=()=>{const blob=new Blob([JSON.stringify({app:'dandelion-seed-letters',version:1,...model},null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='蒲公英台词备份.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000)};
 $('import').onclick=()=>$('fileImport').click();$('fileImport').onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;try{const raw=JSON.parse(await f.text());if(!raw||!Array.isArray(raw.rounds))throw Error('不是有效的台词文件');if(!confirm(`导入 ${raw.rounds.length} 轮台词？这会替换当前编排。`))return;model=sanitize(raw);syncSettings();persist();repaintEditor();toast('已导入')}catch(e){alert('导入失败：'+e.message)}finally{ev.target.value=''}};
-for(const [setting,input,out] of [['scale','imageScale','scaleOut'],['posX','posX','posXOut'],['posY','posY','posYOut'],['speed','spinSpeed','speedOut']]){$(input).addEventListener('input',()=>{model.settings[setting]=Number($(input).value);$(out).textContent=Number($(input).value).toFixed(2);persist()})}
-for(const key of ['mirror','repeat'])$(key).addEventListener('change',()=>{model.settings[key]=$(key).checked;persist()});
-function syncSettings(){for(const [setting,input,out] of [['scale','imageScale','scaleOut'],['posX','posX','posXOut'],['posY','posY','posYOut'],['speed','spinSpeed','speedOut']]){$(input).value=model.settings[setting];$(out).textContent=Number(model.settings[setting]).toFixed(2)}for(const k of ['mirror','repeat'])$(k).checked=model.settings[k]}
+for(const [setting,input,out] of [['scale','imageScale','scaleOut'],['posX','posX','posXOut'],['posY','posY','posYOut'],['speed','spinSpeed','speedOut'],['gap','gap','gapOut']]){$(input).addEventListener('input',()=>{model.settings[setting]=Number($(input).value);$(out).textContent=Number($(input).value).toFixed(2);persist()})}
+for(const key of ['mirror','repeat','flip','guide'])$(key).addEventListener('change',()=>{model.settings[key]=$(key).checked;persist()});
+function syncSettings(){for(const [setting,input,out] of [['scale','imageScale','scaleOut'],['posX','posX','posXOut'],['posY','posY','posYOut'],['speed','spinSpeed','speedOut'],['gap','gap','gapOut']]){$(input).value=model.settings[setting];$(out).textContent=Number(model.settings[setting]).toFixed(2)}for(const k of ['mirror','repeat','flip','guide'])$(k).checked=model.settings[k]}
 function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toast.timeout);toast.timeout=setTimeout(()=>t.style.display='none',1900)}
 function resize(){W=innerWidth;H=innerHeight;dpr=Math.min(devicePixelRatio||1,2);c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0)}addEventListener('resize',resize);resize();
 // Stable spherical seed distribution, drawn as light-catching pappus filaments.
 let rng=719818;function rand(){rng=(Math.imul(rng,1664525)+1013904223)>>>0;return rng/4294967296}
 const golden=Math.PI*(3-Math.sqrt(5)),florets=[];for(let i=0;i<335;i++){const y=1-2*(i+.5)/335,r=Math.sqrt(1-y*y),angle=i*golden;florets.push({x:r*Math.cos(angle),y,z:r*Math.sin(angle),len:.78+rand()*.38,opacity:.65+rand()*.35})}
 function flowerLine(x1,y1,x2,y2,color,width){fc.beginPath();fc.moveTo(x1,y1);fc.lineTo(x2,y2);fc.strokeStyle=color;fc.lineWidth=width;fc.stroke()}
-function paintFlower(theta){const R=104;fc.fillStyle='#000';fc.fillRect(0,0,480,480);fc.save();fc.translate(240,245);fc.globalCompositeOperation='screen';const ca=Math.cos(theta),sa=Math.sin(theta);const points=florets.map(s=>({...s,xx:s.x*ca+s.z*sa,zz:-s.x*sa+s.z*ca})).sort((a,b)=>a.zz-b.zz);
- for(const p of points){const k=1+.11*p.zz,x=p.xx*R*k,y=-p.y*R*k,ex=x*(1.29+p.len*.12),ey=y*(1.29+p.len*.12),alpha=(.16+.59*(p.zz+1)/2)*p.opacity;flowerLine(x*.12,y*.12,x,y,`rgba(229,238,250,${alpha*.7})`,.55);const a=Math.atan2(y,x),ux=-Math.sin(a),uy=Math.cos(a);for(let j=-2;j<=2;j++){const t=j/2,spread=R*.075;flowerLine(x,y,ex+ux*spread*t,ey+uy*spread*t,`rgba(255,255,248,${alpha*.9})`,.53)}fc.beginPath();fc.arc(ex,ey,.7,0,7);fc.fillStyle=`rgba(255,253,240,${alpha})`;fc.fill()}
- flowerLine(0,0,3,104,'rgba(236,230,211,.69)',2);const halo=fc.createRadialGradient(0,0,0,0,0,27);halo.addColorStop(0,'rgba(255,244,210,.7)');halo.addColorStop(1,'rgba(255,244,210,0)');fc.fillStyle=halo;fc.beginPath();fc.arc(0,0,27,0,7);fc.fill();fc.restore()}
+// Same world-space 3D dandelion, sampled at four yaw angles (0°, 90°, 180°, 270°).
+// No duplicated flat bitmap: each face independently reprojects each floret.
+function paintFlower(theta,viewYaw){
+  const R=104;fc.fillStyle='#000';fc.fillRect(0,0,480,480);
+  fc.save();fc.translate(240,245);fc.globalCompositeOperation='screen';
+  const ca=Math.cos(theta+viewYaw),sa=Math.sin(theta+viewYaw);
+  const points=florets.map(s=>({...s,xx:s.x*ca+s.z*sa,zz:-s.x*sa+s.z*ca})).sort((a,b)=>a.zz-b.zz);
+  for(const p of points){
+    const k=1+.12*p.zz,x=p.xx*R*k,y=-p.y*R*k;
+    const ex=x*(1.29+p.len*.12),ey=y*(1.29+p.len*.12);
+    const alpha=(.16+.59*(p.zz+1)/2)*p.opacity;
+    flowerLine(x*.12,y*.12,x,y,`rgba(229,238,250,${alpha*.7})`,.55);
+    const a=Math.atan2(y,x),ux=-Math.sin(a),uy=Math.cos(a);
+    for(let j=-2;j<=2;j++){
+      const t=j/2,spread=R*.075;
+      flowerLine(x,y,ex+ux*spread*t,ey+uy*spread*t,`rgba(255,255,248,${alpha*.9})`,.53);
+    }
+    fc.beginPath();fc.arc(ex,ey,.7,0,7);fc.fillStyle=`rgba(255,253,240,${alpha})`;fc.fill();
+  }
+  flowerLine(0,0,3,104,'rgba(236,230,211,.69)',2);
+  const halo=fc.createRadialGradient(0,0,0,0,0,27);
+  halo.addColorStop(0,'rgba(255,244,210,.7)');halo.addColorStop(1,'rgba(255,244,210,0)');
+  fc.fillStyle=halo;fc.beginPath();fc.arc(0,0,27,0,7);fc.fill();fc.restore();
+}
 const ease=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
 function layoutInk(text){mc.clearRect(0,0,800,800);ic.clearRect(0,0,800,800);const raw=text.trim().split('\n');let lines=[],font=76;const family='"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif';
  while(font>=28){lines=[];mc.font=`500 ${font}px ${family}`;for(const paragraph of raw){let buf='';for(const ch of paragraph){if(buf&&mc.measureText(buf+ch).width>675){lines.push(buf);buf=ch}else buf+=ch}lines.push(buf||' ')}if(lines.length<=4&&lines.length*font*1.28<=310)break;font-=3}
@@ -102,34 +126,81 @@ function layoutInk(text){mc.clearRect(0,0,800,800);ic.clearRect(0,0,800,800);con
  if(result.length>1350){const sampled=[];const stride=result.length/1350;for(let i=0;i<1350;i++)sampled.push(result[Math.floor(i*stride)]);return sampled}return result}
 function prepareFormation(seg){const line=model.rounds[seg.ri]?.lines[seg.li];if(!line)return null;const raw=layoutInk(line.text);let n=seg.ri*4831+seg.li*971+raw.length*3+1911;const rnd=()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return n/4294967296};const pts=raw.map((p,i)=>{const a=rnd()*Math.PI*2,r=190+rnd()*430,depth=rnd()*2-1;return {tx:p.x,ty:p.y,sx:400+Math.cos(a)*r,sy:400+Math.sin(a)*r*.68,arc:70+rnd()*150,depth,delay:rnd()*.43,twist:rnd()*5,sz:.62+rnd()*.95,tail:rnd()}});
  const extras=Array.from({length:75},()=>({x:rnd()*800,y:rnd()*800,z:rnd(),speed:.2+rnd()*.5}));return {pts,extras}}
-function paintScene(seg,local){sc.fillStyle='#000';sc.fillRect(0,0,800,800);sc.save();sc.globalCompositeOperation='screen';const type=seg?.type||'idle';let flowerOpacity=1;
+function paintScene(seg,local,viewYaw){sc.fillStyle='#000';sc.fillRect(0,0,800,800);sc.save();sc.globalCompositeOperation='screen';const type=seg?.type||'idle';let flowerOpacity=1;
  if(type==='gather')flowerOpacity=1-ease(local/(seg.end-seg.start))*1.02;
  if(type==='hold')flowerOpacity=0;
  if(type==='scatter')flowerOpacity=ease(local/(seg.end-seg.start));
- if(flowerOpacity>.004){paintFlower(rotation);sc.globalAlpha=flowerOpacity;sc.drawImage(flower,90,90,620,620);sc.globalAlpha=1}
+ if(flowerOpacity>.004){paintFlower(rotation,viewYaw);sc.globalAlpha=flowerOpacity;sc.drawImage(flower,90,90,620,620);sc.globalAlpha=1}
  if(['gather','hold','scatter'].includes(type)&&formation){const len=seg.end-seg.start,rate=len>0?Math.min(1,local/len):1;let amount=type==='gather'?rate:type==='hold'?1:1-rate;amount=Math.max(0,amount);
  if(type==='gather'||type==='hold'){sc.globalAlpha=type==='gather'?Math.pow(ease((rate-.5)*2),2)*.19:.23;sc.drawImage(ink,0,0);sc.globalAlpha=1}
  sc.lineCap='round';for(const [i,p] of formation.pts.entries()){const threshold=type==='gather'?ease(Math.max(0,Math.min(1,(rate-p.delay)/(1-p.delay)))):type==='hold'?1:1-ease(Math.max(0,Math.min(1,(rate-p.delay*.15)/(1-p.delay*.15))));let x,y,alpha;
  if(type==='scatter'){const t=1-threshold;const a=Math.atan2(p.ty-400,p.tx-400)+p.twist*.4;x=p.tx+Math.cos(a)*(t*t*310+p.depth*50)+Math.sin(a)*t*60;y=p.ty+Math.sin(a)*t*t*270-t*70;alpha=threshold*.9}
  else{const curve=Math.sin(threshold*Math.PI);x=p.sx+(p.tx-p.sx)*threshold+Math.sin(p.twist*2+threshold*6)*p.arc*curve*.3;y=p.sy+(p.ty-p.sy)*threshold-Math.cos(p.twist*2+threshold*4)*p.arc*curve*.21;alpha=.2+.78*threshold}
+ // During flight, each face sees seeds from its own bearing. At rest, letters
+ // face each observer so they remain readable from all four sides.
+ const yaw=Math.sin(viewYaw),cosYaw=Math.cos(viewYaw);
+ const fly=type==='hold'?0:type==='gather'?1-threshold:1-threshold;
+ const lateral=(x-400),dep=p.depth*90*fly;
+ x=400+lateral*(1-.16*fly)+dep*yaw*.48;
+ y=y+dep*cosYaw*.13;
  const z=1+p.depth*(1-threshold)*.48,sz=p.sz*z;if(alpha<.035)continue;sc.strokeStyle=`rgba(235,244,255,${alpha*.52})`;sc.lineWidth=Math.max(.5,.65*sz);if((i%3)===0){sc.beginPath();sc.moveTo(x,y);sc.lineTo(x-2.8*sz,y-6.7*sz);sc.moveTo(x,y);sc.lineTo(x+2.9*sz,y-6.1*sz);sc.moveTo(x,y);sc.lineTo(x,y-8*sz);sc.stroke()}sc.fillStyle=`rgba(255,251,230,${alpha*.9})`;sc.beginPath();sc.arc(x,y,Math.max(.48,sz*.71),0,7);sc.fill();if(i%17===0){sc.fillStyle=`rgba(255,241,203,${alpha*.18})`;sc.beginPath();sc.arc(x,y,sz*2.6,0,7);sc.fill()}}
  for(const p of formation.extras){const a=type==='scatter'?1-amount:1-amount*.3;const xx=p.x+Math.sin(rotation*.5+p.y*.015)*22*a,yy=p.y-(rotation*22*p.speed)%210;sc.fillStyle=`rgba(250,245,229,${.12*amount})`;sc.fillRect(xx,yy,1.25,1.25)} }
  sc.restore()}
-function compose(now){const dt=Math.min(.09,Math.max(0,(now-lastFrame)/1000));lastFrame=now;rotation+=dt*model.settings.speed*.9;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
- let seg=null,local=0;if(playing&&!stillOnly){let t=(now-playStart)/1000;if(model.settings.repeat&&duration>0){t%=duration}else if(duration>0&&t>=duration){playing=false;document.body.classList.remove('playing');document.body.classList.add('finished');seg=null}else if(t<=duration){seg=timeline.find(s=>t>=s.start&&t<s.end)||null;if(seg)local=t-seg.start}}
- const curKey=seg&&['gather','hold','scatter'].includes(seg.type)?`${seg.ri}:${seg.li}`:'';if(curKey!==phaseKey){phaseKey=curKey;formation=curKey?prepareFormation(seg):null}
- paintScene(seg,local);ctx.save();const {scale,posX,posY,mirror}=model.settings;const side=Math.min(W,H)*.91*scale,cx=W*.5+posX*W*.32,cy=H*.5-posY*H*.32;ctx.translate(cx,cy);ctx.scale(mirror?-1:1,1);ctx.drawImage(scene,-side/2,-side/2,side,side);ctx.restore();requestAnimationFrame(compose)}
+function paintOneFace(x,y,tile,orientation,viewYaw,seg,local){
+  paintScene(seg,local,viewYaw);
+  ctx.save();ctx.translate(x,y);ctx.rotate(orientation+(model.settings.flip?Math.PI:0));
+  ctx.scale(model.settings.mirror?-1:1,1);
+  const side=tile*model.settings.scale;
+  ctx.drawImage(scene,-side/2,-side/2,side,side);
+  ctx.restore();
+}
+function paintGuide(cx,cy,tile,gap){
+  if(!model.settings.guide)return;
+  ctx.save();ctx.strokeStyle='rgba(64,222,225,.8)';ctx.setLineDash([5,5]);ctx.lineWidth=1;
+  ctx.strokeRect(cx-gap/2,cy-gap/2,gap,gap);
+  ctx.beginPath();ctx.moveTo(cx-tile-gap,cy);ctx.lineTo(cx+tile+gap,cy);ctx.moveTo(cx,cy-tile-gap);ctx.lineTo(cx,cy+tile+gap);ctx.stroke();
+  ctx.restore();
+}
+let previousPaint=0;
+function compose(now){
+  requestAnimationFrame(compose);
+  // A four-view particle scene can be heavy on mobile, so cap it at ~30fps.
+  if(now-previousPaint<32)return;
+  previousPaint=now;
+  const dt=Math.min(.12,Math.max(0,(now-lastFrame)/1000));lastFrame=now;
+  rotation+=dt*model.settings.speed*.9;
+  ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+  let seg=null,local=0;
+  if(playing&&!stillOnly){
+    let t=(now-playStart)/1000;
+    if(model.settings.repeat&&duration>0)t%=duration;
+    else if(duration>0&&t>=duration){playing=false;document.body.classList.remove('playing');document.body.classList.add('finished');t=duration+1;}
+    if(t<=duration){seg=timeline.find(s=>t>=s.start&&t<s.end)||null;if(seg)local=t-seg.start}
+  }
+  const curKey=seg&&['gather','hold','scatter'].includes(seg.type)?`${seg.ri}:${seg.li}`:'';
+  if(curKey!==phaseKey){phaseKey=curKey;formation=curKey?prepareFormation(seg):null}
+  const s=model.settings;
+  const side=Math.min(W,H)*.98, gap=side*s.gap;
+  const tile=(side-gap)/2, delta=(tile+gap)/2;
+  const cx=W*.5+s.posX*W*.25,cy=H*.5-s.posY*H*.25;
+  // Four distinct cameras + four reflection-corrected rotations.
+  // Image top edges point toward center; guide is off during performance.
+  paintOneFace(cx,cy-delta,tile,Math.PI,Math.PI,seg,local);         // top: rear view
+  paintOneFace(cx,cy+delta,tile,0,0,seg,local);                    // bottom: front view
+  paintOneFace(cx-delta,cy,tile,Math.PI/2,-Math.PI/2,seg,local);   // left view
+  paintOneFace(cx+delta,cy,tile,-Math.PI/2,Math.PI/2,seg,local);   // right view
+  paintGuide(cx,cy,tile,gap);
+}
 requestAnimationFrame(compose);
 function startPlayback(onlyFlower){document.activeElement?.blur?.();refreshTimeline();if(!onlyFlower&&!timeline.some(s=>s.type==='gather')){toast('还没有可播放的台词，请先添加一句');return}playing=true;stillOnly=onlyFlower;playStart=performance.now();phaseKey='';formation=null;document.body.classList.remove('finished');document.body.classList.add('playing');try{const request=document.documentElement.requestFullscreen;if(request)request.call(document.documentElement).catch(()=>{})}catch(e){}try{if(screen.orientation?.lock)screen.orientation.lock('landscape').catch(()=>{})}catch(e){}}
 function stopPlayback(){playing=false;stillOnly=false;phaseKey='';formation=null;document.body.classList.remove('playing');try{if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{})}catch(e){}}
 $('play').onclick=()=>startPlayback(false);$('still').onclick=()=>startPlayback(true);
 document.getElementById('adminLogin').addEventListener('submit',ev=>{ev.preventDefault();loginAdmin(document.getElementById('adminPassword').value)});document.getElementById('cloudLogin').onclick=()=>{document.getElementById('adminLogin').style.display='block';setGate('管理端登录','输入管理密码以读取和编辑云端草稿。');document.getElementById('cloudGate').style.display='flex'};document.getElementById('cloudPreview').onclick=()=>startPlayback(false);document.getElementById('cloudPublish').onclick=async()=>{if(!adminPassword)return;clearTimeout(saveTimer);try{await api('/api/gaixia/admin',{method:'PUT',body:JSON.stringify({draft:model})});$('saved').textContent='云端草稿已保存';await api('/api/gaixia/admin',{method:'POST',body:JSON.stringify({action:'publish'})});document.getElementById('cloudStatus').textContent='已发布 · '+new Date().toLocaleString();toast('发布成功，观众下次打开将读取新版本')}catch(e){toast('发布失败：'+e.message)}};document.getElementById('gateRetry').onclick=()=>loadPublished();document.getElementById('startShow').onclick=()=>startPlayback(false);document.getElementById('replay').onclick=()=>{document.body.classList.remove('ready');loadPublished(true)};document.getElementById('audienceFull').onclick=()=>document.documentElement.requestFullscreen?.().catch(()=>{});
-
 let lastExitTap=0;$('return').addEventListener('click',()=>{const now=Date.now();if(now-lastExitTap<600){stopPlayback();lastExitTap=0}else{lastExitTap=now}});
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&playing)stopPlayback();if(ev.key===' '&&playing){ev.preventDefault();stopPlayback()}});
 // Keep playing even if phone browser exits native fullscreen (iOS Safari frequently does).
 document.addEventListener('visibilitychange',()=>{lastFrame=performance.now()});
-syncSettings();repaintEditor();if(isAdmin){document.getElementById("adminLogin").style.display="block";setGate("管理端登录","输入管理密码以读取和编辑云端草稿。")}else{loadPublished()}
+syncSettings();repaintEditor();if(isAdmin){document.getElementById('adminLogin').style.display='block';setGate('管理端登录','输入管理密码以读取和编辑云端草稿。')}else{loadPublished()}
 </script>
 </body>
 </html>
