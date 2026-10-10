@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>蒲公英 · 四面倒金字塔全息 · 种子写信</title>
+<title>蒲公英 · 四面倒金字塔全息 · 种子写信 v3</title>
 <style>
 :root{color-scheme:dark;--ink:#eeeae5;--muted:#a39fa2;--line:#3a343b;--gold:#ddc99e;--bg:#111014}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#000;color:var(--ink);font-family:system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;overflow:hidden}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.3;cursor:not-allowed}
@@ -20,7 +20,7 @@ body.audience #editor,body.admin:not(.admin-authenticated) #editor{display:none}
 <body>
 <div id="cloudGate"><div class="gate-card"><h2 id="gateTitle">连接云端演出</h2><p id="gateMessage">正在读取最新发布的演出…</p><form id="adminLogin" style="display:none"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="管理密码"><button class="btn primary" type="submit">进入管理端</button></form><button id="gateRetry" class="btn" style="display:none">重新读取</button></div></div><div class="audience-tools"><button id="startShow" class="btn" type="button">开始演出</button><button id="replay" class="btn">↻ 重播</button><button id="audienceFull" class="btn">全屏</button></div><canvas id="projection" aria-label="四面倒金字塔全息投影四视图画面"></canvas>
 <div id="editor">
-  <header><h1>✦ 蒲公英 · 种子写信</h1><p>四面倒金字塔全息｜上下左右同时渲染四个方位。种子聚字、停留、散去，临时编辑轮次与时间。</p></header>
+  <header><h1>✦ 蒲公英 · 种子写信</h1><p>四面倒金字塔全息｜已修复四面交叠遮挡。种子聚字、停留、散去，临时编辑轮次与时间。</p></header>
   <div class="admin-tools"><button id="cloudLogin" class="btn">登录云端管理</button><button id="cloudPreview" class="btn">预览当前草稿</button><button id="cloudPublish" class="btn primary">发布演出</button><span id="cloudStatus" class="cloud-status">尚未连接</span></div><main>
     <div class="section-title"><span>演出编排 · 轮次不限</span><span id="saved" class="secondary">自动保存</span></div>
     <div id="rounds"></div>
@@ -97,7 +97,7 @@ function flowerLine(x1,y1,x2,y2,color,width){fc.beginPath();fc.moveTo(x1,y1);fc.
 // Same world-space 3D dandelion, sampled at four yaw angles (0°, 90°, 180°, 270°).
 // No duplicated flat bitmap: each face independently reprojects each floret.
 function paintFlower(theta,viewYaw){
-  const R=104;fc.fillStyle='#000';fc.fillRect(0,0,480,480);
+  const R=140;fc.fillStyle='#000';fc.fillRect(0,0,480,480);
   fc.save();fc.translate(240,245);fc.globalCompositeOperation='screen';
   const ca=Math.cos(theta+viewYaw),sa=Math.sin(theta+viewYaw);
   const points=florets.map(s=>({...s,xx:s.x*ca+s.z*sa,zz:-s.x*sa+s.z*ca})).sort((a,b)=>a.zz-b.zz);
@@ -150,6 +150,9 @@ function paintOneFace(x,y,tile,orientation,viewYaw,seg,local){
   paintScene(seg,local,viewYaw);
   ctx.save();ctx.translate(x,y);ctx.rotate(orientation+(model.settings.flip?Math.PI:0));
   ctx.scale(model.settings.mirror?-1:1,1);
+  // Each face owns an exclusive square cell. Never let a neighboring
+  // face's black background overwrite this face when imageScale > 1.
+  ctx.beginPath();ctx.rect(-tile/2,-tile/2,tile,tile);ctx.clip();
   const side=tile*model.settings.scale;
   ctx.drawImage(scene,-side/2,-side/2,side,side);
   ctx.restore();
@@ -157,8 +160,13 @@ function paintOneFace(x,y,tile,orientation,viewYaw,seg,local){
 function paintGuide(cx,cy,tile,gap){
   if(!model.settings.guide)return;
   ctx.save();ctx.strokeStyle='rgba(64,222,225,.8)';ctx.setLineDash([5,5]);ctx.lineWidth=1;
-  ctx.strokeRect(cx-gap/2,cy-gap/2,gap,gap);
-  ctx.beginPath();ctx.moveTo(cx-tile-gap,cy);ctx.lineTo(cx+tile+gap,cy);ctx.moveTo(cx,cy-tile-gap);ctx.lineTo(cx,cy+tile+gap);ctx.stroke();
+  // Center clearance for the physical pyramid (not the inter-face padding).
+  const delta=tile+gap/2;
+  const hole=2*delta-tile;
+  ctx.strokeRect(cx-hole/2,cy-hole/2,hole,hole);
+  for(const [x,y] of [[cx,cy-delta],[cx,cy+delta],[cx-delta,cy],[cx+delta,cy]])ctx.strokeRect(x-tile/2,y-tile/2,tile,tile);
+  ctx.beginPath();ctx.moveTo(cx-tile*1.5-gap/2,cy);ctx.lineTo(cx+tile*1.5+gap/2,cy);
+  ctx.moveTo(cx,cy-tile*1.5-gap/2);ctx.lineTo(cx,cy+tile*1.5+gap/2);ctx.stroke();
   ctx.restore();
 }
 let previousPaint=0;
@@ -181,7 +189,10 @@ function compose(now){
   if(curKey!==phaseKey){phaseKey=curKey;formation=curKey?prepareFormation(seg):null}
   const s=model.settings;
   const side=Math.min(W,H)*.98, gap=side*s.gap;
-  const tile=(side-gap)/2, delta=(tile+gap)/2;
+  // Cross layout geometry: three face-widths across (left, center, right).
+  // Previous implementation used /2, so adjacent face canvases overlapped;
+  // left/right black background rectangles cut holes in top/bottom flowers.
+  const tile=(side-gap)/3, delta=tile+gap/2;
   const cx=W*.5+s.posX*W*.25,cy=H*.5-s.posY*H*.25;
   // Four distinct cameras + four reflection-corrected rotations.
   // Image top edges point toward center; guide is off during performance.
