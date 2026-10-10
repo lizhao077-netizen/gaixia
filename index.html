@@ -18,7 +18,7 @@ body.audience #editor,body.admin:not(.admin-authenticated) #editor{display:none}
 </style>
 </head>
 <body>
-<div id="cloudGate"><div class="gate-card"><h2 id="gateTitle">连接云端演出</h2><p id="gateMessage">正在读取最新发布的演出…</p><form id="adminLogin" style="display:none"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="管理密码"><button class="btn primary" type="submit">进入管理端</button></form><button id="gateRetry" class="btn" style="display:none">重新读取</button></div></div><div class="audience-tools"><button id="startShow" class="btn" type="button">开始演出</button><button id="replay" class="btn">↻ 重播</button><button id="audienceFull" class="btn">全屏</button></div><canvas id="projection" aria-label="四面倒金字塔全息投影四视图画面"></canvas>
+<div id="cloudGate"><div class="gate-card"><h2 id="gateTitle">连接云端演出</h2><p id="gateMessage">正在读取最新发布的演出…</p><form id="adminLogin" style="display:none"><input id="adminPassword" type="password" autocomplete="current-password" placeholder="管理密码"><button class="btn primary" type="submit">进入管理端</button></form><button id="gateRetry" class="btn" style="display:none">重新读取</button></div></div><div class="audience-tools"><button id="startShow" class="btn" type="button">开始播放</button><button id="replay" class="btn">↻ 重播</button><button id="audienceFull" class="btn">全屏</button></div><canvas id="projection" aria-label="四面倒金字塔全息投影四视图画面"></canvas>
 <div id="editor">
   <header><h1>✦ 蒲公英 · 种子写信</h1><p>四面倒金字塔全息｜已修复四面交叠遮挡。种子聚字、停留、散去，临时编辑轮次与时间。</p></header>
   <div class="admin-tools"><button id="cloudLogin" class="btn">登录云端管理</button><button id="cloudPreview" class="btn">预览当前草稿</button><button id="cloudPublish" class="btn primary">发布演出</button><span id="cloudStatus" class="cloud-status">尚未连接</span></div><main>
