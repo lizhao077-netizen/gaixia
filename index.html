@@ -119,8 +119,8 @@ function paintFlower(theta,viewYaw){
   fc.fillStyle=halo;fc.beginPath();fc.arc(0,0,27,0,7);fc.fill();fc.restore();
 }
 const ease=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
-function layoutInk(text){mc.clearRect(0,0,800,800);ic.clearRect(0,0,800,800);const raw=text.trim().split('\n');let lines=[],font=76;const family='"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif';
- while(font>=28){lines=[];mc.font=`500 ${font}px ${family}`;for(const paragraph of raw){let buf='';for(const ch of paragraph){if(buf&&mc.measureText(buf+ch).width>675){lines.push(buf);buf=ch}else buf+=ch}lines.push(buf||' ')}if(lines.length<=4&&lines.length*font*1.28<=310)break;font-=3}
+function layoutInk(text){mc.clearRect(0,0,800,800);ic.clearRect(0,0,800,800);const raw=text.trim().split('\n');let lines=[],font=98;const family='"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif';
+ while(font>=32){lines=[];mc.font=`500 ${font}px ${family}`;for(const paragraph of raw){let buf='';for(const ch of paragraph){if(buf&&mc.measureText(buf+ch).width>710){lines.push(buf);buf=ch}else buf+=ch}lines.push(buf||' ')}if(lines.length<=4&&lines.length*font*1.28<=370)break;font-=3}
  const lineH=font*1.28,startY=418-(lines.length-1)*lineH/2;for(const context of [mc,ic]){context.font=`500 ${font}px ${family}`;context.textAlign='center';context.textBaseline='middle';context.fillStyle='white';lines.forEach((line,i)=>context.fillText(line,400,startY+i*lineH))}
  const pixels=mc.getImageData(0,0,800,800).data;const result=[];let seed=1234;const step=4;for(let y=160;y<645;y+=step)for(let x=52;x<748;x+=step){const alpha=pixels[(y*800+x)*4+3];if(alpha>135){seed=(Math.imul(seed,1664525)+1013904223)>>>0;result.push({x:x+(seed%3)-1,y:y+((seed>>>8)%3)-1})}};
  if(result.length>1350){const sampled=[];const stride=result.length/1350;for(let i=0;i<1350;i++)sampled.push(result[Math.floor(i*stride)]);return sampled}return result}
